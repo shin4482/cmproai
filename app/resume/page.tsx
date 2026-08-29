@@ -155,7 +155,38 @@ export default function ResumePage() {
   // =========================
 
 const saveResume = () => {
-  const resumeData = {
+  // =========================
+  // BASIC VALIDATION
+  // =========================
+
+  if (!fullName.trim()) {
+    alert("Please enter your full name.");
+    return;
+  }
+
+  if (!professionalTitle.trim()) {
+    alert("Please enter your professional title.");
+    return;
+  }
+
+  if (!email.trim()) {
+    alert("Please enter your email address.");
+    return;
+  }
+
+  // Basic email format check
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailPattern.test(email)) {
+    alert("Please enter a valid email address.");
+    return;
+  }
+
+  // =========================
+  // SAVE
+  // =========================
+
+  console.log("CMproAI Resume Data:", {
     fullName,
     professionalTitle,
     email,
@@ -165,16 +196,9 @@ const saveResume = () => {
     experiences,
     educations,
     skills,
-  };
+  });
 
-  localStorage.setItem(
-    "cmproai_resume",
-    JSON.stringify(resumeData)
-  );
-
-  console.log("CMproAI Resume Saved:", resumeData);
-
-  alert("Resume saved successfully!");
+  alert("Resume information saved successfully!");
 };
 
 const clearResume = () => {
