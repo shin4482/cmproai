@@ -26,6 +26,30 @@ export default function ResumePage() {
   const [location, setLocation] = useState("");
   const [summary, setSummary] = useState("");
   const [skills, setSkills] = useState("");
+  const RESUME_STORAGE_KEY = "cmproai_resume";
+  useEffect(() => {
+  const savedResume = localStorage.getItem(RESUME_STORAGE_KEY);
+
+  if (!savedResume) {
+    return;
+  }
+
+  try {
+    const resumeData = JSON.parse(savedResume);
+
+    setFullName(resumeData.fullName || "");
+    setProfessionalTitle(resumeData.professionalTitle || "");
+    setEmail(resumeData.email || "");
+    setPhone(resumeData.phone || "");
+    setLocation(resumeData.location || "");
+    setSummary(resumeData.summary || "");
+    setSkills(resumeData.skills || "");
+    setExperiences(resumeData.experiences || []);
+    setEducations(resumeData.educations || []);
+  } catch (error) {
+    console.error("Failed to load saved resume:", error);
+  }
+}, []);
 
   const [experiences, setExperiences] = useState<Experience[]>([
     {
@@ -262,19 +286,26 @@ for (let i = 0; i < educations.length; i++) {
   // SAVE
   // =========================
 
-  console.log("CMproAI Resume Data:", {
-    fullName,
-    professionalTitle,
-    email,
-    phone,
-    location,
-    summary,
-    experiences,
-    educations,
-    skills,
-  });
+const resumeData = {
+  fullName,
+  professionalTitle,
+  email,
+  phone,
+  location,
+  summary,
+  experiences,
+  educations,
+  skills,
+};
 
-  alert("Resume information saved successfully!");
+localStorage.setItem(
+  RESUME_STORAGE_KEY,
+  JSON.stringify(resumeData)
+);
+
+console.log("CMproAI Resume Data:", resumeData);
+
+alert("Resume information saved successfully!");
 };
 
 const clearResume = () => {
