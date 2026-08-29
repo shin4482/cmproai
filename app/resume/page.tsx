@@ -174,6 +174,8 @@ const saveResume = () => {
     return;
   }
 
+
+
   // Basic email format check
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -181,6 +183,43 @@ const saveResume = () => {
     alert("Please enter a valid email address.");
     return;
   }
+
+  // =========================
+// EXPERIENCE VALIDATION
+// =========================
+
+for (let i = 0; i < experiences.length; i++) {
+  const experience = experiences[i];
+  const experienceNumber = i + 1;
+
+  if (!experience.jobTitle.trim()) {
+    alert(
+      `Experience ${experienceNumber}: Please enter the job title.`
+    );
+    return;
+  }
+
+  if (!experience.company.trim()) {
+    alert(
+      `Experience ${experienceNumber}: Please enter the company name.`
+    );
+    return;
+  }
+
+  if (!experience.startDate) {
+    alert(
+      `Experience ${experienceNumber}: Please enter the start date.`
+    );
+    return;
+  }
+
+  if (!experience.currentJob && !experience.endDate) {
+    alert(
+      `Experience ${experienceNumber}: Please enter the end date or select "I currently work here".`
+    );
+    return;
+  }
+}
 
   // =========================
   // SAVE
