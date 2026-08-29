@@ -221,6 +221,43 @@ for (let i = 0; i < experiences.length; i++) {
   }
 }
 
+// =========================
+// EDUCATION VALIDATION
+// =========================
+
+for (let i = 0; i < educations.length; i++) {
+  const education = educations[i];
+  const educationNumber = i + 1;
+
+  if (!education.school.trim()) {
+    alert(
+      `Education ${educationNumber}: Please enter the school or university.`
+    );
+    return;
+  }
+
+  if (!education.degree.trim()) {
+    alert(
+      `Education ${educationNumber}: Please enter the degree or program.`
+    );
+    return;
+  }
+
+  if (!education.startDate) {
+    alert(
+      `Education ${educationNumber}: Please enter the start date.`
+    );
+    return;
+  }
+
+  if (!education.endDate) {
+    alert(
+      `Education ${educationNumber}: Please enter the end date.`
+    );
+    return;
+  }
+}
+
   // =========================
   // SAVE
   // =========================
