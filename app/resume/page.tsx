@@ -198,8 +198,6 @@ const saveResume = () => {
     return;
   }
 
-
-
   // Basic email format check
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -1131,31 +1129,31 @@ const clearResume = () => {
 
         </section>
 
-                {/* =========================
-            SAVE RESUME
-        ========================= */}
+{/* =========================
+    SAVE RESUME
+========================= */}
 
-        <div className="mt-8 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+<div className="mt-8 flex flex-wrap justify-end gap-3">
 
-          <button
-            type="button"
-            onClick={clearResume}
-            className="rounded-full border border-red-400 px-8 py-4 font-semibold text-red-400 transition hover:bg-red-400 hover:text-white"
-          >
-            Clear Resume
-          </button>
+  <button
+    type="button"
+    onClick={clearResume}
+    className="rounded-full border border-red-400 px-8 py-4 font-semibold text-red-400 transition hover:bg-red-400 hover:text-white"
+  >
+    Clear Resume
+  </button>
 
-          <button
-            type="button"
-            onClick={saveResume}
-            className="rounded-full bg-cyan-400 px-8 py-4 font-semibold text-slate-950 transition hover:bg-cyan-300"
-          >
-            Save Resume
-          </button>
+  <button
+    type="button"
+    onClick={saveResume}
+    className="rounded-full bg-cyan-400 px-8 py-4 font-semibold text-slate-950 transition hover:bg-cyan-300"
+  >
+    Save Resume
+  </button>
 
-        </div>
+</div>
 
-      </section>
-    </main>
+</section>
+</main>
   );
 }
