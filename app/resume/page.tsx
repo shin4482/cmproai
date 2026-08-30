@@ -26,6 +26,7 @@ export default function ResumePage() {
   const [location, setLocation] = useState("");
   const [summary, setSummary] = useState("");
   const [skills, setSkills] = useState("");
+  const [targetJob, setTargetJob] = useState("");
   const RESUME_STORAGE_KEY = "cmproai_resume";
   useEffect(() => {
   const savedResume = localStorage.getItem(RESUME_STORAGE_KEY);
@@ -44,6 +45,7 @@ export default function ResumePage() {
     setLocation(resumeData.location || "");
     setSummary(resumeData.summary || "");
     setSkills(resumeData.skills || "");
+    setTargetJob(resumeData.targetJob || "");
     setExperiences(resumeData.experiences || []);
     setEducations(resumeData.educations || []);
   } catch (error) {
@@ -294,6 +296,7 @@ const resumeData = {
   experiences,
   educations,
   skills,
+  targetJob,
 };
 
 localStorage.setItem(
@@ -324,6 +327,7 @@ const clearResume = () => {
   setLocation("");
   setSummary("");
   setSkills("");
+  setTargetJob("");
 
   setExperiences([
     {
@@ -927,6 +931,31 @@ const clearResume = () => {
           />
 
         </section>
+
+        {/* =========================
+    TARGET JOB
+========================= */}
+
+<section className="mt-6 rounded-2xl border border-slate-800 bg-slate-900 p-6">
+
+  <h2 className="text-xl font-semibold">
+    Target Job
+  </h2>
+
+  <p className="mt-2 text-sm text-slate-400">
+    Tell CMproAI what type of job you are targeting.
+    This will help tailor your resume later.
+  </p>
+
+  <input
+    type="text"
+    placeholder="e.g. Customer Support Specialist"
+    value={targetJob}
+    onChange={(e) => setTargetJob(e.target.value)}
+    className="mt-5 w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none focus:border-cyan-400"
+  />
+
+</section>
 
                 {/* =========================
             RESUME PREVIEW
