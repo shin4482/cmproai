@@ -27,6 +27,8 @@ export default function ResumePage() {
   const [summary, setSummary] = useState("");
   const [skills, setSkills] = useState("");
   const [targetJob, setTargetJob] = useState("");
+  const [jobDescription, setJobDescription] = useState("");
+  const [tailoredResume, setTailoredResume] = useState("");
   const RESUME_STORAGE_KEY = "cmproai_resume";
   useEffect(() => {
   const savedResume = localStorage.getItem(RESUME_STORAGE_KEY);
@@ -46,6 +48,7 @@ export default function ResumePage() {
     setSummary(resumeData.summary || "");
     setSkills(resumeData.skills || "");
     setTargetJob(resumeData.targetJob || "");
+    setJobDescription(resumeData.jobDescription || "");
     setExperiences(resumeData.experiences || []);
     setEducations(resumeData.educations || []);
   } catch (error) {
@@ -176,6 +179,19 @@ export default function ResumePage() {
     );
   };
 
+  const tailorResume = () => {
+  if (!jobDescription.trim()) {
+    alert("Please paste a job description first.");
+    return;
+  }
+
+  setTailoredResume(
+    "CMproAI has received the job description. AI tailoring will be connected in the next stage."
+  );
+
+  alert("AI Resume Tailoring test successful!");
+};
+
   // =========================
   // SAVE RESUME
   // =========================
@@ -297,6 +313,7 @@ const resumeData = {
   educations,
   skills,
   targetJob,
+  jobDescription,
 };
 
 localStorage.setItem(
@@ -328,6 +345,7 @@ const clearResume = () => {
   setSummary("");
   setSkills("");
   setTargetJob("");
+  setJobDescription("");
 
   setExperiences([
     {
@@ -954,6 +972,68 @@ const clearResume = () => {
     onChange={(e) => setTargetJob(e.target.value)}
     className="mt-5 w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none focus:border-cyan-400"
   />
+
+</section>
+
+{/* =========================
+    JOB DESCRIPTION
+========================= */}
+
+<section className="mt-6 rounded-2xl border border-slate-800 bg-slate-900 p-6">
+
+  <h2 className="text-xl font-semibold">
+    Job Description
+  </h2>
+
+  <p className="mt-2 text-sm text-slate-400">
+    Paste the job posting here. CMproAI will use it later
+    to tailor your resume to the position.
+  </p>
+
+  <textarea
+    rows={10}
+    placeholder="Paste the job description here..."
+    value={jobDescription}
+    onChange={(e) => setJobDescription(e.target.value)}
+    className="mt-5 w-full resize-y rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none focus:border-cyan-400"
+  />
+
+</section>
+
+{/* =========================
+    AI RESUME TAILORING
+========================= */}
+
+<section className="mt-6 rounded-2xl border border-cyan-900 bg-slate-900 p-6">
+
+  <h2 className="text-xl font-semibold">
+    AI Resume Tailoring
+  </h2>
+
+  <p className="mt-2 text-sm text-slate-400">
+    CMproAI will analyze your resume and the job description
+    to help create a version tailored to the position.
+  </p>
+
+<button
+  type="button"
+  onClick={tailorResume}
+  className="mt-5 rounded-lg bg-cyan-400 px-6 py-3 font-semibold text-slate-950 transition hover:bg-cyan-300"
+>
+  ✨ Tailor My Resume
+</button>
+
+{tailoredResume && (
+  <div className="mt-6 rounded-xl border border-slate-700 bg-slate-950 p-5">
+    <h3 className="font-semibold text-cyan-400">
+      AI Tailoring Result
+    </h3>
+
+    <p className="mt-3 whitespace-pre-wrap text-sm leading-7 text-slate-300">
+      {tailoredResume}
+    </p>
+  </div>
+)}
 
 </section>
 
